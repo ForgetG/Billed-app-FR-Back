@@ -21,6 +21,29 @@ const login = async (req, res) => {
     return res.status(500).send({ message: err.message });
   }
 };
+
+const register = async (req, res) => {
+  try {
+    const { name, email, password, type } = req.body;
+    const hashedPassword = await hash(password);
+    const user = await User.create({
+      name,
+      email,
+      password: hashedPassword,
+      type,
+      status: 'disconnected',
+    });
+    return res.status(201).json({
+      name: user.name,
+      email: user.email,
+      type: user.type,
+      status: user.status,
+    });
+  } catch (err) {
+    return res.status(500).send({ message: err.message });
+  }
+};
+
 const loggout = async (req, res) => {
   const { user } = req;
   try {
@@ -33,5 +56,6 @@ const loggout = async (req, res) => {
 
 module.exports = {
   login,
+  register,
   loggout,
 };

@@ -6,6 +6,7 @@ const authController = require('../controllers/auth');
 
 router.get('/', (req, res) => { res.send('auth routes'); });
 router.post('/login', authController.login);
+router.post('/register', authController.register);
 
 router.patch('/loggout', authController.loggout);
 
