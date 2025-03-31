@@ -6,6 +6,7 @@ const authMiddleware = require('./middlewares/auth');
 const authRoute = require('./routes/auth');
 const userRoute = require('./routes/user');
 const billRoute = require('./routes/bill');
+const dedRoute = require('./routes/ded');
 
 const upload = multer({ dest: 'public/' });
 const app = express();
@@ -21,5 +22,6 @@ app.use(upload.single('file'));
 app.use('/auth', authRoute);
 app.use('/users', userRoute);
 app.use('/bills', billRoute);
+app.use('/deds', dedRoute);
 
 module.exports = app;
